@@ -19,8 +19,9 @@ local Dialog = include("dialogutility")
 
 -- dont remove this next line. used by the game's engine.
 -- namespace AncientTurretDecryptor
-
 AncientTurretDecryptor = {}
+local self = AncientTurretDecryptor
+
 AncientTurretDecryptor.interactionThreshold = 30000
 local inventory = nil
 local decryptButton = nil
@@ -44,8 +45,8 @@ function AncientTurretDecryptor.initializationFinished()
 		local ok, r = Sector():invokeFunction("radiochatter", "addSpecificLines", Entity().id.string,
 		{
 			"New service: Ancient Technology Decryption!",
-			"RGLX-CORP Ancient Tech Decryption Services. The old stuff is the good stuff!",
-			"Got a cool new turret but it's based on some Haathi tech? We can fix that. Talk to our decryptor's AI today.",
+			"We offer Ancient Tech Decryption services. The old stuff is the good stuff!",
+			"Got a cool new turret but it's based on ancient technology? We can fix that. Talk to our decryption kiosk today.",
 		})
 	end
 	print("rglx_AncientTurretDecryptor: initializationFinished(): done")
@@ -105,14 +106,14 @@ end
 
 -- from http://lua-users.org/wiki/FormattingNumbers, by a sam_lie there
 function comma_value(amount)
-  local formatted = amount
-  while true do  
+	local formatted = amount
+	while true do  
 	formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1,%2')
 	if (k==0) then
-	  break
+		break
 	end
-  end
-  return formatted
+	end
+	return formatted
 end
 
 function AncientTurretDecryptor.decryptionComplete()
@@ -213,7 +214,7 @@ function AncientTurretDecryptor.decryptTurretFromInventory(inventoryIndex)
 		end
 
 		local receiptString = Format(buyer.name .. " paid ".. decryptcost .." " .. decryptresource.name .. " to decrypt an Ancient item.")
-		buyer:payResource(receiptString,decryptcost,indexedTurret.material)
+		buyer:payResource(receiptString,indexedTurret.material,decryptcost)
 
 		local decryptedTurret = indexedTurret
 		decryptedTurret.ancient = false

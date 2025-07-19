@@ -58,3 +58,6 @@ luac.out
 *.sublime-project
 *.lnk
 modconfigasd.lua
+
+*.ttf
+*.otf

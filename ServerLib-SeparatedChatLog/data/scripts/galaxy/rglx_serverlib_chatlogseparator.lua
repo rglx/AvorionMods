@@ -107,7 +107,8 @@ if onServer() then
 		end
 
 		-- don't need to include a timestamp, the logwriter does that for us
-		local outputMessage = "<" .. player.name .. ">\t" .. playerIndex .. "\t[" .. channelString .. "]\t" .. text
+		-- we also want to clean up whitespace here, since the game isn't filtering certain kinds of linebreaks and whitespace, but is just rendering it badly
+		local outputMessage = "<" .. player.name .. ">\t" .. playerIndex .. "\t[" .. channelString .. "]\t" .. text:gsub("%s+"," ")
 
 		-- and write out
 		rglxServerLibSeparatedChatLog.writeTextToFile(outputMessage)

@@ -59,33 +59,3 @@ function RebuildStations.updateServer(timeStep)
     RebuildStations.updateConstruction(currentContents)
 
 end
-
-
-function RebuildStations.updateServer(timeStep)
-    local sector = Sector()
-
-    if not RebuildStations.specsInitialized then
-        RebuildStations.initializeSpecs(sector:getCoordinates())
-        RebuildStations.specsInitialized = true
-    end
-
-    RebuildStations.updateTimer = RebuildStations.updateTimer + timeStep
-    if RebuildStations.updateTimer < 10 * 60 then return end
-
-    RebuildStations.updateTimer = 0
-
-    if not random():test(0.2) and not RebuildStations.isUnitTestActive then
-        return
-    end
-
-    if not RebuildStations.specsFactionIndex then
---        print("faction index is nil")
-        return
-    end
-
-    -- gather data
-    local currentContents = RebuildStations.getCurrentContents()
-
-    -- update
-    RebuildStations.updateConstruction(currentContents)
-end
